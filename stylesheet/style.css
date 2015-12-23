@@ -1,0 +1,13 @@
+.window {
+    border: 1px solid black;
+    width: 150px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: burlywood;
+}
+
+#window_container {
+    position: relative;
+}
