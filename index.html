@@ -5,10 +5,18 @@
     <title>Personal Web Desktop</title>
     <link rel="icon" href="image/favicon.png">
     <link rel="stylesheet" href="stylesheet/style.css">
+    <template id="window-template">
+        <div class="appWindow">
+            <div class="toolbar">
+                <div class="closeWindow">X</div>
+            </div>
+        </div>
+    </template>
 
 </head>
 <body>
 <button id="new_window">Click me</button>
+<span id="mousepos">X: 0, Y: 0</span>
 <div id="window_container">
 
 </div>
