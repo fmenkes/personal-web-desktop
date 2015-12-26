@@ -10,13 +10,24 @@
             <div class="toolbar">
                 <div class="closeWindow">X</div>
             </div>
+            <div class="app-container">
+
+            </div>
         </div>
     </template>
-
+    <template id="web-chat">
+        <div class="chat-window">
+            <form class="chat-form">
+                <input title="chat-input">
+            </form>
+        </div>
+    </template>
 </head>
 <body>
-<button id="new_window">Click me</button>
-<span id="mousepos">X: 0, Y: 0</span>
+<nav class="menu-bar">
+    <button id="new_window">New blank window</button>
+    <button id="new_chat">New chat window</button>
+</nav>
 <div id="window_container">
 
 </div>
