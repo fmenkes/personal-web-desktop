@@ -1,19 +1,29 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Helvetica", sans-serif;
+}
+
 .appWindow {
     border: 1px solid black;
-    width: 150px;
-    height: 200px;
+    width: 200px;
+    height: 300px;
     position: absolute;
     top: 0;
     left: 0;
     background-color: burlywood;
     z-index: 10;
+
 }
 
 .toolbar {
     height: 20px;
     background-color: cornflowerblue;
     border-bottom: 1px solid black;
-    cursor: move;
+    cursor: default;
 }
 
 .closeWindow {
@@ -22,8 +32,32 @@
     height: 16px;
     padding: 2px;
     border-left: 1px solid black;
+    cursor: pointer;
+}
+
+.app-container {
+    height: 280px;
+}
+
+.chat-content {
+    background-color: white;
+    height: 260px;
+    font-size: 10px;
+    padding: 0 2px;
+}
+
+.chat-form input {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #window_container {
     position: relative;
+}
+
+.menu-bar {
+    height: 50px;
+    background-color: cadetblue;
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
 }

@@ -6,9 +6,9 @@ In this examination assignment you are supposed to build what we call a "Persona
 Please check that your application meets the requirements below before submitting your final version.
 
 ### Functional requirements PWD:
-* The application should be a single page application.
-* The user shall be able to open multiple windows within the application.
-* The user shall be able to drag and move the windows in the document.
+* ~~The application should be a single page application.~~
+* ~~The user shall be able to open multiple windows within the application.~~
+* ~~The user shall be able to drag and move the windows in the document.~~
 * The user shall be able to open and close new windows of the desired application by clicking or double clicking an icon at the desktop.
 * The icon used to open the window should be represented in the upper bar of the window.
 * Windows should get focus when clicked/dragged.
@@ -68,11 +68,11 @@ The web socket server will send a "heartbeat" message to keep the connection ope
 Your application can simply ignore those messages completly.
 
 ### Functional requirements, Chat application:
-* The user should be able to have several chat applications running at the same time.
+* ~~The user should be able to have several chat applications running at the same time.~~
 * When the user opens the application for the first time the user should be asked to write his/her username.
 * The username should remain the same the next time the user starts a chat application or the PWD is restarted.
-* The user should be able to send chat messages using a textarea.
-* The user should be able to see at least the 20 latest messages since the chat applications was opened.
+* ~~The user should be able to send chat messages using a textarea.~~
+* ~~The user should be able to see at least the 20 latest messages since the chat applications was opened.~~
 * One, by you decided, extended feature.
 
 You are free to add functionality not described above. Added functionality could be:
