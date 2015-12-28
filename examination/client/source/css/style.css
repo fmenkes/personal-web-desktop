@@ -14,7 +14,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: burlywood;
+    background-color: white;
     z-index: 10;
 
 }
@@ -33,6 +33,15 @@ body {
     padding: 2px;
     border-left: 1px solid black;
     cursor: pointer;
+}
+
+.material-icons {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
 }
 
 .app-container {
@@ -55,9 +64,32 @@ body {
     position: relative;
 }
 
+.right-aligned {
+    overflow: hidden;
+    list-style-type: none;
+    margin-left: auto;
+}
+
+.right-aligned li {
+    float: left;
+}
+
 .menu-bar {
+    display: flex;
     height: 50px;
     background-color: cadetblue;
     border-bottom: 1px solid grey;
     margin-bottom: 10px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.memory-container {
+    display: block;
+    margin: 20px auto 0;
+}
+
+.memory-brick {
+    height: 36px;
+    width: 36px;
 }

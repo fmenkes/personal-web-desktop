@@ -5,6 +5,7 @@
     <title>Personal Web Desktop</title>
     <link rel="icon" href="image/favicon.png">
     <link rel="stylesheet" href="stylesheet/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <template id="window-template">
         <div class="appWindow">
             <div class="toolbar">
@@ -25,8 +26,12 @@
 </head>
 <body>
 <nav class="menu-bar">
-    <button id="new_window">New blank window</button>
-    <button id="new_chat">New chat window</button>
+    <span>Personal Web Desktop</span>
+    <ul class="right-aligned">
+        <li><i class="material-icons md-36" id="new_window">add</i></li>
+        <li><i class="material-icons md-36" id="new_chat">chat</i></li>
+        <li><i class="material-icons md-36" id="new_memory">videogame_asset</i></li>
+    </ul>
 </nav>
 <div id="window_container">
 

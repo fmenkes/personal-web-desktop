@@ -1,8 +1,10 @@
 var newWindow = document.querySelector("#new_window");
 var newChatWindow = document.querySelector("#new_chat");
+var newMemoryWindow = document.querySelector("#new_memory");
 var container = document.querySelector("#window_container");
 
 var Chat = require("./Chat");
+var Memory = require("./Memory");
 
 var moving = null;
 
@@ -22,7 +24,7 @@ var mousePos = {
 newWindow.addEventListener("click", function() {
     var appWindow = createAppWindow();
 
-    document.querySelector("#window_container").appendChild(appWindow);
+    container.appendChild(appWindow);
 });
 
 newChatWindow.addEventListener("click", function() {
@@ -50,6 +52,22 @@ newChatWindow.addEventListener("click", function() {
     container.appendChild(appWindow);
 });
 
+newMemoryWindow.addEventListener("click", function() {
+    var appWindow = createAppWindow("Memory");
+    var appContainer = appWindow.querySelector(".app-container");
+    var memoryContainer = document.createElement("div");
+    memoryContainer.classList.add("memory-container");
+    memoryContainer.style.width = (4 * 36) + "px";
+    memoryContainer.style.height = (4 * 36) + "px";
+    var memory = new Memory();
+
+    memory.attachBoard(memoryContainer);
+
+    appContainer.appendChild(memoryContainer);
+
+    container.appendChild(appWindow);
+});
+
 var createAppWindow = function(name) {
     name = name || "Blank window";
     var template = document.querySelector("#window-template");
@@ -61,29 +79,15 @@ var createAppWindow = function(name) {
 
     toolbar.insertBefore(appName, closeWindow);
 
-    toolbar.addEventListener("mousedown", function(event) {
-        var forEach = Array.prototype.forEach;
-        var windows = document.querySelectorAll(".appWindow");
-
-        forEach.call(windows, function(item) {
-            item.style.zIndex = "-1";
-        });
-
-        event.target.parentNode.style.zIndex = "1";
-
-        moving = event.target.parentNode;
-
-        distance.x = mousePos.x - event.target.parentNode.offsetLeft;
-        distance.y = mousePos.y - event.target.parentNode.offsetTop;
-    });
+    toolbar.addEventListener("mousedown", giveFocus);
 
     closeWindow.addEventListener("click", function(event) {
         container.removeChild(event.target.parentNode.parentNode);
     });
 
     if (container.lastElementChild) {
-        appWindow.style.top = (container.lastElementChild.offsetTop + 10) + "px";
-        appWindow.style.left = (container.lastElementChild.offsetLeft + 10) + "px";
+        appWindow.style.top = (container.lastElementChild.offsetTop + 20) + "px";
+        appWindow.style.left = (container.lastElementChild.offsetLeft + 20) + "px";
     }
 
     return appWindow;
@@ -103,6 +107,22 @@ var moveWindow = function(event) {
             moving.style.top = 0;
         }
     }
+};
+
+var giveFocus = function(event) {
+    var forEach = Array.prototype.forEach;
+    var windows = document.querySelectorAll(".appWindow");
+
+    forEach.call(windows, function(item) {
+        item.style.zIndex = "-1";
+    });
+
+    event.target.parentNode.style.zIndex = "1";
+
+    moving = event.target.parentNode;
+
+    distance.x = mousePos.x - event.target.parentNode.offsetLeft;
+    distance.y = mousePos.y - event.target.parentNode.offsetTop;
 };
 
 document.addEventListener("mousemove", moveWindow);
