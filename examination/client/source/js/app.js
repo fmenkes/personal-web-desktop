@@ -54,16 +54,16 @@ newChatWindow.addEventListener("click", function() {
 
 newMemoryWindow.addEventListener("click", function() {
     var appWindow = createAppWindow("Memory");
-    var appContainer = appWindow.querySelector(".app-container");
-    var memoryContainer = document.createElement("div");
-    memoryContainer.classList.add("memory-container");
-    memoryContainer.style.width = (4 * 36) + "px";
-    memoryContainer.style.height = (4 * 36) + "px";
-    var memory = new Memory();
+    var memoryContainer = appWindow.querySelector(".app-container");
 
-    memory.attachBoard(memoryContainer);
+    var template = document.querySelector("#memory");
+    memoryContainer.appendChild(document.importNode(template.content, true));
 
-    appContainer.appendChild(memoryContainer);
+    var memoryBoard = memoryContainer.querySelector(".memory-board");
+    memoryBoard.style.width = (4 * 36) + "px";
+    memoryBoard.style.height = (4 * 36) + "px";
+
+    var memory = new Memory([4, 4], memoryContainer);
 
     container.appendChild(appWindow);
 });
@@ -79,7 +79,9 @@ var createAppWindow = function(name) {
 
     toolbar.insertBefore(appName, closeWindow);
 
-    toolbar.addEventListener("mousedown", giveFocus);
+    appWindow.addEventListener("mousedown", giveFocus);
+
+    toolbar.addEventListener("mousedown", startMove);
 
     closeWindow.addEventListener("click", function(event) {
         container.removeChild(event.target.parentNode.parentNode);
@@ -117,8 +119,12 @@ var giveFocus = function(event) {
         item.style.zIndex = "-1";
     });
 
-    event.target.parentNode.style.zIndex = "1";
+    event.currentTarget.style.zIndex = "1";
 
+    event.stopPropagation();
+};
+
+var startMove = function(event) {
     moving = event.target.parentNode;
 
     distance.x = mousePos.x - event.target.parentNode.offsetLeft;

@@ -27,7 +27,7 @@ The following three applications should at least be included in the desktop appl
 See [exercise/memory/README.md](https://github.com/1dv022/exercise/blob/memory/exercise/memory/README.md) for a description of this application.
 
 ### Functional requirements, Memory application:
-* The user should be able to open and play multiple memory games simultaneously.
+* ~~The user should be able to open and play multiple memory games simultaneously.~~
 * The user should be able to play the game using only the keyboard.
 * One, by you decided, extended feature
 
