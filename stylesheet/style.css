@@ -84,7 +84,7 @@ body {
     padding: 0 10px;
 }
 
-.memory-container {
+.memory-board {
     display: block;
     margin: 20px auto 0;
 }
@@ -92,4 +92,8 @@ body {
 .memory-brick {
     height: 36px;
     width: 36px;
+}
+
+.removed {
+    visibility: hidden;
 }
