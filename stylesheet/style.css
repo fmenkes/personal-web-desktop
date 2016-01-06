@@ -4,6 +4,9 @@ html, body {
 }
 
 body {
+    /*background-image: url("../image/background.jpg");*/
+    background-color: azure;
+    height: 100%;
     font-family: "Helvetica", sans-serif;
 }
 
@@ -62,6 +65,7 @@ body {
 
 #window_container {
     position: relative;
+
 }
 
 .right-aligned {
