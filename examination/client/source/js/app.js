@@ -10,6 +10,8 @@ var moving = null;
 
 var chat = null;
 
+var zIndex = 1;
+
 // The distance of the cursor to the edge of the element
 var distance = {
     x: 0,
@@ -92,6 +94,10 @@ var createAppWindow = function(name) {
         appWindow.style.left = (container.lastElementChild.offsetLeft + 20) + "px";
     }
 
+    appWindow.style.zIndex = zIndex;
+
+    zIndex += 1;
+
     return appWindow;
 };
 
@@ -112,14 +118,10 @@ var moveWindow = function(event) {
 };
 
 var giveFocus = function(event) {
-    var forEach = Array.prototype.forEach;
-    var windows = document.querySelectorAll(".appWindow");
-
-    forEach.call(windows, function(item) {
-        item.style.zIndex = "-1";
-    });
-
-    event.currentTarget.style.zIndex = "1";
+    if (parseInt(event.currentTarget.style.zIndex, 10) !== zIndex - 1) {
+        event.currentTarget.style.zIndex = zIndex;
+        zIndex += 1;
+    }
 
     event.stopPropagation();
 };
