@@ -10,15 +10,18 @@ body {
     font-family: "Helvetica", sans-serif;
 }
 
-.appWindow {
+.app-window {
     border: 1px solid black;
-    width: 200px;
-    height: 300px;
+    min-width: 200px;
+    min-height: 300px;
+    width: auto;
+    height: auto;
     position: absolute;
     top: 0;
     left: 0;
     background-color: white;
     z-index: 10;
+    border-radius: 5px;
 
 }
 
@@ -29,7 +32,7 @@ body {
     cursor: default;
 }
 
-.closeWindow {
+.close-window {
     background-color: red;
     float: right;
     height: 16px;
@@ -47,11 +50,7 @@ body {
     font-size: 36px;
 }
 
-.app-container {
-    height: 280px;
-}
-
-.chat-content {
+.chat-lines {
     background-color: white;
     height: 260px;
     font-size: 10px;
@@ -88,14 +87,14 @@ body {
     padding: 0 10px;
 }
 
-.memory-board {
-    display: block;
-    margin: 20px auto 0;
+.board {
+    margin: 20px 20px;
 }
 
 .memory-brick {
-    height: 36px;
-    width: 36px;
+    height: 48px;
+    width: 48px;
+    margin-bottom: -4px;
 }
 
 .removed {
