@@ -1,42 +1,59 @@
-function Memory(size, container) {
+function Memory(boardX, boardY) {
     // TODO: where should I handle legal/illegal board sizes?
 
-    this.size = size || [4, 4];
-    this.totalBricks = this.size[0] * this.size[1];
+    this.boardX = boardX || 4;
+    this.boardY = boardY || 4;
+    this.totalBricks = this.boardX * this.boardY;
     this.removedBricks = 0;
     this.moves = 0;
-    this.board = container.querySelector(".memory-board");
-    this.info = container.querySelector(".info");
+    this.board = null;
+    this.info = null;
     this.bricks = [];
     this.boundReveal = this.revealBrick.bind(this);
 
     this.selectedBrick = null;
 
-    this.initializeBoard();
+    this.appContent = this.createAppContent();
 }
 
+Memory.prototype.createAppContent = function() {
+    var template = document.querySelector("#memory-template");
+    var appContent = document.importNode(template.content, true).querySelector(".app-content");
+
+    this.board = appContent.querySelector(".board");
+    this.info = appContent.querySelector(".info");
+    this.initializeBoard();
+
+    this.attachEventListeners(appContent);
+
+    return appContent;
+};
+
+Memory.prototype.attachEventListeners = function(appContent) {
+    this.board.addEventListener("click", this.boundReveal);
+};
+
 Memory.prototype.initializeBoard = function() {
+    var _this = this;
+
+    this.board.style.width = (48 * this.boardX) + "px";
+    this.board.style.height = (48 * this.boardY) + "px";
+
     var i;
     var count = 0;
-    for (i = 0; i < this.size[0] * this.size[1]; i += 2) {
+    for (i = 0; i < this.totalBricks; i += 2) {
         this.bricks[i] = count % 8;
         this.bricks[i + 1] = count % 8;
         count = count == 7 ? count = 0 : count += 1;
     }
 
     // Fisher-Yates
-    for (i = this.bricks.length - 1; i > 0; i--) {
+    for (i = this.totalBricks - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var k = this.bricks[j];
         this.bricks[j] = this.bricks[i];
         this.bricks[i] = k;
     }
-
-    this.attachBoard();
-};
-
-Memory.prototype.attachBoard = function() {
-    var _this = this;
 
     this.bricks.forEach(function() {
         var brick = document.createElement("img");
@@ -44,7 +61,6 @@ Memory.prototype.attachBoard = function() {
         brick.setAttribute("src", "/image/hidden.png");
 
         _this.board.appendChild(brick);
-        _this.board.addEventListener("click", _this.boundReveal);
     });
 };
 
@@ -105,6 +121,10 @@ Memory.prototype.checkMatch = function(brick) {
 
 Memory.prototype.endGame = function() {
     this.info.textContent = "You won! Moves taken: " + this.moves;
+};
+
+Memory.prototype.getAppContent = function() {
+    return this.appContent;
 };
 
 module.exports = Memory;

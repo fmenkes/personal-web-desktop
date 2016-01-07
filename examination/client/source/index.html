@@ -7,27 +7,26 @@
     <link rel="stylesheet" href="stylesheet/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <template id="window-template">
-        <div class="appWindow">
+        <div class="app-window">
             <div class="toolbar">
-                <div class="closeWindow">X</div>
+                <div class="close-window">X</div>
             </div>
-            <div class="app-container">
-
-            </div>
+            <div class="app-container"></div>
         </div>
     </template>
-    <template id="web-chat">
-        <div class="chat-window">
+    <template id="chat-template">
+        <div class="app-content chat">
+            <div class="chat-lines"></div>
             <form class="chat-form">
                 <input title="chat-input">
             </form>
         </div>
     </template>
-    <template id ="memory">
-        <div class="memory-board">
-
+    <template id ="memory-template">
+        <div class="app-content memory">
+            <div class="board"></div>
+            <span class="info"></span>
         </div>
-        <span class="info"></span>
     </template>
 </head>
 <body>

@@ -1,139 +1,36 @@
-var newWindow = document.querySelector("#new_window");
-var newChatWindow = document.querySelector("#new_chat");
-var newMemoryWindow = document.querySelector("#new_memory");
-var container = document.querySelector("#window_container");
+// App controls the UI and is responsible for creating new app instances. Adding new apps
+// to the Personal Web Desktop should be as easy as importing it in app.js and creating it.
 
-var Chat = require("./Chat");
-var Memory = require("./Memory");
+// The apps follow the same structure:
+// They all contain a function called getAppContent, which returns the div that needs to
+// be attached to the app window's app container. For apps
 
-var moving = null;
+(function init() {
+    // Initialize the desktop.
+    var Desktop = require("./Desktop");
+    var desktop = new Desktop();
 
-var chat = null;
+    // Import the necessary apps.
+    var Memory = require("./Memory");
+    var Chat = require("./Chat");
 
-var zIndex = 1;
+    var newWindow = document.querySelector("#new_window");
+    var newChatWindow = document.querySelector("#new_chat");
+    var newMemoryWindow = document.querySelector("#new_memory");
 
-// The distance of the cursor to the edge of the element
-var distance = {
-    x: 0,
-    y: 0
-};
-
-var mousePos = {
-    x: 0,
-    y: 0
-};
-
-newWindow.addEventListener("click", function() {
-    var appWindow = createAppWindow();
-
-    container.appendChild(appWindow);
-});
-
-newChatWindow.addEventListener("click", function() {
-    if (!chat) {
-        chat = new Chat();
-    }
-
-    var chatContent = chat.chatContent.cloneNode(true);
-    var appWindow = createAppWindow("Webchat");
-    var template = document.querySelector("#web-chat");
-    var chatWindow = document.importNode(template.content, true).querySelector(".chat-window");
-    var chatForm = chatWindow.querySelector(".chat-form");
-    chatWindow.insertBefore(chatContent, chatForm);
-
-    chatForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        chat.sendMessage(event.target.elements[0].value);
-
-        event.target.elements[0].value = "";
+    newWindow.addEventListener("click", function() {
+        desktop.attachWindow();
     });
 
-    appWindow.querySelector(".app-container").appendChild(chatWindow);
-
-    container.appendChild(appWindow);
-});
-
-newMemoryWindow.addEventListener("click", function() {
-    var appWindow = createAppWindow("Memory");
-    var memoryContainer = appWindow.querySelector(".app-container");
-
-    var template = document.querySelector("#memory");
-    memoryContainer.appendChild(document.importNode(template.content, true));
-
-    var memoryBoard = memoryContainer.querySelector(".memory-board");
-    memoryBoard.style.width = (4 * 36) + "px";
-    memoryBoard.style.height = (4 * 36) + "px";
-
-    var memory = new Memory([4, 4], memoryContainer);
-
-    container.appendChild(appWindow);
-});
-
-var createAppWindow = function(name) {
-    name = name || "Blank window";
-    var template = document.querySelector("#window-template");
-    var appWindow = document.importNode(template.content, true).querySelector(".appWindow");
-    var toolbar = appWindow.querySelector(".toolbar");
-    var appName = document.createTextNode(name);
-
-    var closeWindow = appWindow.querySelector(".closeWindow");
-
-    toolbar.insertBefore(appName, closeWindow);
-
-    appWindow.addEventListener("mousedown", giveFocus);
-
-    toolbar.addEventListener("mousedown", startMove);
-
-    closeWindow.addEventListener("click", function(event) {
-        container.removeChild(event.target.parentNode.parentNode);
-    });
-
-    if (container.lastElementChild) {
-        appWindow.style.top = (container.lastElementChild.offsetTop + 20) + "px";
-        appWindow.style.left = (container.lastElementChild.offsetLeft + 20) + "px";
-    }
-
-    appWindow.style.zIndex = zIndex;
-
-    zIndex += 1;
-
-    return appWindow;
-};
-
-var moveWindow = function(event) {
-    mousePos.x = event.clientX - container.offsetLeft;
-    mousePos.y = event.clientY - container.offsetTop;
-
-    if (moving) {
-        event.preventDefault();
-
-        moving.style.top =  mousePos.y - distance.y + "px";
-        moving.style.left =  mousePos.x - distance.x + "px";
-
-        if (moving.offsetTop < 0) {
-            moving.style.top = 0;
+    newChatWindow.addEventListener("click", function() {
+        if (!desktop.instances.chat) {
+            desktop.instances.chat = new Chat();
         }
-    }
-};
 
-var giveFocus = function(event) {
-    if (parseInt(event.currentTarget.style.zIndex, 10) !== zIndex - 1) {
-        event.currentTarget.style.zIndex = zIndex;
-        zIndex += 1;
-    }
+        desktop.attachWindow(desktop.instances.chat);
+    });
 
-    event.stopPropagation();
-};
-
-var startMove = function(event) {
-    moving = event.target.parentNode;
-
-    distance.x = mousePos.x - event.target.parentNode.offsetLeft;
-    distance.y = mousePos.y - event.target.parentNode.offsetTop;
-};
-
-document.addEventListener("mousemove", moveWindow);
-document.addEventListener("mouseup", function() {
-    moving = null;
-});
+    newMemoryWindow.addEventListener("click", function() {
+        desktop.attachWindow(new Memory(4, 4));
+    });
+})();
