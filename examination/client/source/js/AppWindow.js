@@ -12,18 +12,14 @@ function AppWindow(width, height) {
 AppWindow.prototype.createWindow = function() {
     var template = document.querySelector("#window-template");
     return document.importNode(template.content, true).querySelector(".app-window");
-
-    /*appWindow.style.width = width + "px";
-    appWindow.style.height = height + "px";*/
 };
-
-/*AppWindow.prototype.resize = function(width, height) {
-    this.div.style.width = width + "px";
-    this.div.style.height = height + "px";
-};*/
 
 AppWindow.prototype.attachApp = function(app) {
     this.app = app;
+
+    while (this.appContainer.hasChildNodes()) {
+        this.appContainer.removeChild(this.appContainer.firstElementChild);
+    }
 
     this.appContainer.appendChild(app.getAppContent());
 };

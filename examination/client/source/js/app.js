@@ -24,7 +24,19 @@
 
     newChatWindow.addEventListener("click", function() {
         if (!desktop.instances.chat) {
-            desktop.instances.chat = new Chat();
+            if (!desktop.username) {
+                var user = prompt("Please enter a username:");
+
+                if (user) {
+                    localStorage.setItem("username", user);
+
+                    desktop.username = user;
+                } else {
+                    return;
+                }
+            }
+
+            desktop.instances.chat = new Chat(desktop.username);
         }
 
         desktop.attachWindow(desktop.instances.chat);

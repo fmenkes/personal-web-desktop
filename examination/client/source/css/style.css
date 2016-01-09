@@ -12,7 +12,7 @@ body {
 
 .app-window {
     border: 1px solid black;
-    min-width: 200px;
+    min-width: 250px;
     min-height: 300px;
     width: auto;
     height: auto;
@@ -52,9 +52,18 @@ body {
 
 .chat-lines {
     background-color: white;
-    height: 260px;
-    font-size: 10px;
     padding: 0 2px;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 280px;
+    overflow: scroll;
+}
+
+.chat-message {
+    width: 100%;
+    word-wrap: break-word;
+    font-family: "Consolas", monospace;
+    font-size: 12px;
 }
 
 .chat-form input {
@@ -88,7 +97,8 @@ body {
 }
 
 .board {
-    margin: 20px 20px;
+    margin: 0 auto;
+    min-height: 192px;
 }
 
 .memory-brick {
@@ -99,4 +109,26 @@ body {
 
 .removed {
     visibility: hidden;
+}
+
+.new-game input {
+    width: 20px;
+}
+
+.memory {
+    padding: 20px;
+}
+
+.chat {
+    width: 500px;
+}
+
+.memory-menu {
+    margin: 20px auto 0;
+    width: 150px;
+    font-size: 12px;
+}
+
+.memory-menu span {
+    margin-bottom: 10px;
 }

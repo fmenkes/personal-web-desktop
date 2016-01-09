@@ -6,6 +6,8 @@ var AppWindow = require("./AppWindow");
 function Desktop() {
     this.windows = [];
 
+    this.username = localStorage.getItem("username");
+
     this.container = document.querySelector("#window_container");
 
     this.settings = {

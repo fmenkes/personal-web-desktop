@@ -25,7 +25,19 @@
     <template id ="memory-template">
         <div class="app-content memory">
             <div class="board"></div>
-            <span class="info"></span>
+            <div class="memory-menu">
+                <span class="info"></span>
+                <form class="new-game">
+                    <button type="submit">New game: </button>
+                    <input type="text" maxlength="2" title="board-x-size" value="4">
+                    x <input maxlength="2" type="text" title="board-y-size" value="4">
+                </form>
+            </div>
+        </div>
+    </template>
+    <template id="chat-line-template">
+        <div class="chat-message">
+            <span><strong class="username"></strong>: </span><span class="chat-line"></span>
         </div>
     </template>
 </head>

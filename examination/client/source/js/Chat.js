@@ -3,13 +3,15 @@
  * @constructor
  */
 
-function Chat() {
+function Chat(username) {
     var _this = this;
 
     this.lastLines = [];
+
+    // Attempt to retrieve stored username. If this fails, it is handled in createAppContent.
+    this.username = username;
     this.appContent = this.createAppContent();
     this.chatLines = this.appContent.querySelector(".chat-lines");
-    this.username = "fp";
     this.apiKey = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
     this.socket = new WebSocket("ws://vhost3.lnu.se:20080/socket/");
 
@@ -28,8 +30,8 @@ function Chat() {
 
 Chat.prototype.createAppContent = function() {
     // TODO: better way of doing this than templates?
-
     var template = document.querySelector("#chat-template");
+
     var appContent = document.importNode(template.content, true).querySelector(".app-content");
 
     this.attachEventListeners(appContent);
@@ -52,7 +54,7 @@ Chat.prototype.submitChatForm = function(event) {
 };
 
 Chat.prototype.appendLine = function(username, line) {
-    this.lastLines.push(username + ": " + line);
+    this.lastLines.push({username: username, line: line});
     if (this.lastLines.length > 20) {
         this.lastLines.shift();
     }
@@ -62,17 +64,22 @@ Chat.prototype.appendLine = function(username, line) {
 
 Chat.prototype.convertLinesToHTML = function() {
     var _this = this;
+    var template = document.querySelector("#chat-line-template");
+    var chatLine = document.importNode(template.content, true).querySelector(".chat-message");
 
     while (this.chatLines.hasChildNodes()) {
         this.chatLines.removeChild(this.chatLines.firstElementChild);
     }
 
-    this.lastLines.forEach(function(line) {
-        var newLine = document.createElement("span");
-        newLine.textContent = line;
+    this.lastLines.forEach(function(line, index) {
+        var order = _this.lastLines.length - index;
+        var newLine = chatLine.cloneNode(true);
+        newLine.querySelector(".username").textContent = line.username;
+        newLine.querySelector(".chat-line").textContent = line.line;
+
+        newLine.style.order = order;
 
         _this.chatLines.appendChild(newLine);
-        _this.chatLines.appendChild(document.createElement("br"));
     });
 
     this.publishMessages();
@@ -99,7 +106,7 @@ Chat.prototype.sendMessage = function(message) {
     data.key = this.apiKey;
     data.type = "message";
 
-    this.socket.send(JSON.stringify(data));
+    //this.socket.send(JSON.stringify(data));
 
     // offline capabilities TODO: use this as a fallback?
     this.appendLine(this.username, message);

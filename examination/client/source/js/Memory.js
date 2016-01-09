@@ -3,7 +3,7 @@ function Memory(boardX, boardY) {
 
     this.boardX = boardX || 4;
     this.boardY = boardY || 4;
-    this.totalBricks = this.boardX * this.boardY;
+    this.totalBricks = 0;
     this.removedBricks = 0;
     this.moves = 0;
     this.board = null;
@@ -30,7 +30,44 @@ Memory.prototype.createAppContent = function() {
 };
 
 Memory.prototype.attachEventListeners = function(appContent) {
-    this.board.addEventListener("click", this.boundReveal);
+    var board = appContent.querySelector(".board");
+    var newGame = appContent.querySelector(".new-game");
+
+    board.addEventListener("click", this.boundReveal);
+    newGame.addEventListener("submit", this.newGame.bind(this));
+};
+
+Memory.prototype.newGame = function(event) {
+    event.preventDefault();
+
+    var newBoardX = event.target.elements[1].value;
+    var newBoardY = event.target.elements[2].value;
+
+    if (isNaN(newBoardX) || isNaN(newBoardY)) {
+        this.info.textContent = "Please enter only numbers.";
+        return;
+    }
+
+    if (newBoardX < 2 || newBoardX > 10 || newBoardY < 2 || newBoardY > 10) {
+        this.info.textContent = "Please enter numbers between 2 and 10.";
+        return;
+    }
+
+    if ((newBoardX * newBoardY) % 2 !== 0) {
+        this.info.textContent = "The amount of bricks must be even.";
+        return;
+    }
+
+    this.boardX = newBoardX;
+    this.boardY = newBoardY;
+
+    while (this.board.hasChildNodes()) {
+        this.board.removeChild(this.board.firstElementChild);
+    }
+
+    this.info.textContent = "";
+
+    this.initializeBoard();
 };
 
 Memory.prototype.initializeBoard = function() {
@@ -38,6 +75,11 @@ Memory.prototype.initializeBoard = function() {
 
     this.board.style.width = (48 * this.boardX) + "px";
     this.board.style.height = (48 * this.boardY) + "px";
+
+    this.totalBricks = this.boardX * this.boardY;
+    this.removedBricks = 0;
+    this.moves = 0;
+    this.bricks = [];
 
     var i;
     var count = 0;
