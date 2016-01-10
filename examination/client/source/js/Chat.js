@@ -8,12 +8,14 @@ function Chat(username) {
 
     this.lastLines = [];
 
-    // Attempt to retrieve stored username. If this fails, it is handled in createAppContent.
+    this.defaultTitle = document.title;
     this.username = username;
     this.appContent = this.createAppContent();
     this.chatLines = this.appContent.querySelector(".chat-lines");
     this.apiKey = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
     this.socket = new WebSocket("ws://vhost3.lnu.se:20080/socket/");
+
+    document.addEventListener("visibilitychange", this.handleVisibilityChange.bind(this));
 
     // TODO: Make sure the socket opens before the user can send messages
 
@@ -34,6 +36,8 @@ Chat.prototype.createAppContent = function() {
 
     var appContent = document.importNode(template.content, true).querySelector(".app-content");
 
+    appContent.querySelector("textarea").focus();
+
     this.attachEventListeners(appContent);
 
     return appContent;
@@ -41,22 +45,41 @@ Chat.prototype.createAppContent = function() {
 
 Chat.prototype.attachEventListeners = function(appContent) {
     var chatForm = appContent.querySelector(".chat-form");
+    var textArea = chatForm.querySelector("textarea");
 
-    chatForm.addEventListener("submit", this.submitChatForm.bind(this));
+    textArea.addEventListener("keydown", this.handleTextInput.bind(this));
+    //textArea.addEventListener("focus", this.handleFocus.bind(this));
 };
 
-Chat.prototype.submitChatForm = function(event) {
-    event.preventDefault();
+Chat.prototype.handleTextInput = function(event) {
+    if (!event.shiftKey && event.keyCode === 13) {
+        event.preventDefault();
 
-    this.sendMessage(event.target.elements[0].value);
+        this.sendMessage(event.target.value);
 
-    event.target.elements[0].value = "";
+        event.target.value = "";
+    }
+};
+
+Chat.prototype.handleVisibilityChange = function() {
+    if (!document.hidden) {
+        document.title = this.defaultTitle;
+    }
 };
 
 Chat.prototype.appendLine = function(username, line) {
     this.lastLines.push({username: username, line: line});
+
     if (this.lastLines.length > 20) {
         this.lastLines.shift();
+    }
+
+    if (document.hidden) {
+        var audio = this.appContent.querySelector("audio");
+
+        audio.play();
+
+        document.title = "* " + this.defaultTitle;
     }
 
     this.convertLinesToHTML();
@@ -106,10 +129,10 @@ Chat.prototype.sendMessage = function(message) {
     data.key = this.apiKey;
     data.type = "message";
 
-    //this.socket.send(JSON.stringify(data));
+    this.socket.send(JSON.stringify(data));
 
     // offline capabilities TODO: use this as a fallback?
-    this.appendLine(this.username, message);
+    //this.appendLine(this.username, message);
 };
 
 Chat.prototype.getAppContent = function() {

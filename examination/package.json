@@ -45,12 +45,14 @@
     "build:html": "cp -R ./client/source/*.html ./client/debug/",
     "build:css": "cp -R ./client/source/css/*.css ./client/debug/stylesheet/",
     "build:img": "cp -R ./client/source/image ./client/debug/",
+    "build:audio": "cp -R ./client/source/audio ./client/debug/",
     "server:http": "http-server ./client/debug -p 4000",
 
     "watch:js": "watchify ./client/source/js/app.js -o ./client/debug/javascript/build.js -d -v --poll",
     "watch:html": "nodemon --watch ./client/source -e html -x \"npm run build:html\" --legacy-watch",
     "watch:css": "nodemon --watch ./client/source/css -e css -x \"npm run build:css\" --legacy-watch",
-    "watch:img": "nodemon --watch ./client/source/image -e jpg,jpeg,png,webp,gif,svg -x \"npm run build:img\" --legacy-watch"
+    "watch:img": "nodemon --watch ./client/source/image -e jpg,jpeg,png,webp,gif,svg -x \"npm run build:img\" --legacy-watch",
+    "watch:audio": "nodemon --watch ./client/source/audio -e mp3,ogg,wav -x \"npm run build:audio\" --legacy-watch"
 
   }
 }

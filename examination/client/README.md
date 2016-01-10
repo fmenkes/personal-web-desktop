@@ -69,11 +69,11 @@ Your application can simply ignore those messages completly.
 
 ### Functional requirements, Chat application:
 * ~~The user should be able to have several chat applications running at the same time.~~
-* When the user opens the application for the first time the user should be asked to write his/her username.
-* The username should remain the same the next time the user starts a chat application or the PWD is restarted.
+* ~~When the user opens the application for the first time the user should be asked to write his/her username.~~
+* ~~The username should remain the same the next time the user starts a chat application or the PWD is restarted.~~
 * ~~The user should be able to send chat messages using a textarea.~~
 * ~~The user should be able to see at least the 20 latest messages since the chat applications was opened.~~
-* One, by you decided, extended feature.
+* ~~One, by you decided, extended feature.~~
 
 You are free to add functionality not described above. Added functionality could be:
 * Ability to choose which channel to listen to.

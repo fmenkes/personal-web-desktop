@@ -16,9 +16,10 @@
     </template>
     <template id="chat-template">
         <div class="app-content chat">
+            <audio><source src="audio/notification.mp3" type="audio/mpeg"></audio>
             <div class="chat-lines"></div>
             <form class="chat-form">
-                <input title="chat-input">
+                <textarea class="chat-input" title="chat-input" autofocus></textarea>
             </form>
         </div>
     </template>
@@ -37,7 +38,7 @@
     </template>
     <template id="chat-line-template">
         <div class="chat-message">
-            <span><strong class="username"></strong>: </span><span class="chat-line"></span>
+            <span><strong class="username"></strong>: </span><pre class="chat-line"></pre>
         </div>
     </template>
 </head>
