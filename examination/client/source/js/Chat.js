@@ -8,8 +8,11 @@ function Chat(username) {
 
     this.lastLines = [];
 
+    this.imageSrc = "chat";
+
     this.defaultTitle = document.title;
     this.username = username;
+
     this.appContent = this.createAppContent();
     this.chatLines = this.appContent.querySelector(".chat-lines");
     this.apiKey = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
@@ -36,8 +39,6 @@ Chat.prototype.createAppContent = function() {
 
     var appContent = document.importNode(template.content, true).querySelector(".app-content");
 
-    appContent.querySelector("textarea").focus();
-
     this.attachEventListeners(appContent);
 
     return appContent;
@@ -55,9 +56,38 @@ Chat.prototype.handleTextInput = function(event) {
     if (!event.shiftKey && event.keyCode === 13) {
         event.preventDefault();
 
-        this.sendMessage(event.target.value);
+        if (event.target.value.charAt(0) === "/") {
+            this.handleCommand(event.target.value.slice(1));
+        } else if (event.target.value !== "") {
+            this.sendMessage(event.target.value);
+        }
 
         event.target.value = "";
+    }
+};
+
+Chat.prototype.handleCommand = function(command) {
+    var commandKeyword = command.split(" ")[0];
+    var commandParameters = null;
+
+    if (command.split(" ").length > 1) {
+        commandParameters = command.substr(command.indexOf(" ") + 1, command.length);
+    }
+
+    switch (commandKeyword) {
+        case "name":
+            if (commandParameters) {
+                this.username = commandParameters;
+                localStorage.setItem("username", commandParameters);
+
+                this.appendLine("PWD", "Your username is now " + commandParameters + ".");
+            } else {
+                this.appendLine("PWD", "Please enter a username.");
+            }
+
+            break;
+        default:
+            this.appendLine("PWD", commandKeyword + " command not yet implemented.");
     }
 };
 

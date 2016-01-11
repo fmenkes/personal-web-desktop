@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Credit:
+         Puzzle by Vicons Design from the Noun Project
+         chat by @daosme from the Noun Project
+         Notebook by Calvin Goodman from the Noun Project
+         Close by Michael Wallner from the Noun Project-->
     <meta charset="UTF-8">
     <title>Personal Web Desktop</title>
     <link rel="icon" href="image/favicon.png">
     <link rel="stylesheet" href="stylesheet/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <template id="window-template">
         <div class="app-window">
             <div class="toolbar">
-                <div class="close-window">X</div>
+                <div class="toolbar-menu">
+                    <img class="toolbar-icon"/>
+                    <div class="toolbar-dropdown removed"></div>
+                </div>
+                <img class="close-window" src="image/close.png" alt="Close window"/>
             </div>
             <div class="app-container"></div>
+        </div>
+    </template>
+    <template id="dropdown-template">
+        <div class="dropdown-item">
+            <span class="dropdown-name"></span>
         </div>
     </template>
     <template id="chat-template">
@@ -21,6 +35,11 @@
             <form class="chat-form">
                 <textarea class="chat-input" title="chat-input" autofocus></textarea>
             </form>
+        </div>
+    </template>
+    <template id="chat-line-template">
+        <div class="chat-message">
+            <span><strong class="username"></strong>: </span><pre class="chat-line"></pre>
         </div>
     </template>
     <template id ="memory-template">
@@ -36,19 +55,27 @@
             </div>
         </div>
     </template>
-    <template id="chat-line-template">
-        <div class="chat-message">
-            <span><strong class="username"></strong>: </span><pre class="chat-line"></pre>
+    <template id="notebook-template-new">
+        <div class="app-content notebook">
+            <textarea class="note" title="note" autofocus></textarea>
         </div>
+    </template>
+    <template id="notebook-template-load">
+        <div class="app-content notebook">
+            <ul class="notelist"></ul>
+        </div>
+    </template>
+    <template id="notebook-listitem-template">
+        <div class="notebook-listitem"><span class="item-name"></span><img class="delete-item" src="image/close.png" /></div>
     </template>
 </head>
 <body>
 <nav class="menu-bar">
     <span>Personal Web Desktop</span>
     <ul class="right-aligned">
-        <li><i class="material-icons md-36" id="new_window">add</i></li>
-        <li><i class="material-icons md-36" id="new_chat">chat</i></li>
-        <li><i class="material-icons md-36" id="new_memory">videogame_asset</i></li>
+        <li><img src="image/diary.png" id="new_notebook" alt="notebook" /></li>
+        <li><img src="image/chat.png" id="new_chat" alt="chat" /></li>
+        <li><img src="image/puzzle.png" id="new_memory" alt="memory" /></li>
     </ul>
 </nav>
 <div id="window_container">

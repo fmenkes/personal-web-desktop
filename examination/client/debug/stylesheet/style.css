@@ -4,8 +4,7 @@ html, body {
 }
 
 body {
-    /*background-image: url("../image/background.jpg");*/
-    background-color: azure;
+    background-image: url("../image/background.jpg");
     height: 100%;
     font-family: "Helvetica", sans-serif;
 }
@@ -22,32 +21,54 @@ body {
     background-color: white;
     z-index: 10;
     border-radius: 5px;
-
 }
 
 .toolbar {
-    height: 20px;
-    background-color: cornflowerblue;
+    height: 30px;
+    background-color: gainsboro;
     border-bottom: 1px solid black;
     cursor: default;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.toolbar-menu {
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.toolbar-icon {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.toolbar-dropdown {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 80px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
+    top: 31px;
+    left: 0;
+    font-size: 12px;
+}
+
+.toolbar-dropdown div {
+    padding: 5px;
+}
+
+.toolbar-dropdown div:hover {
+    background-color: #f1f1f1;
 }
 
 .close-window {
-    background-color: red;
     float: right;
-    height: 16px;
-    padding: 2px;
-    border-left: 1px solid black;
     cursor: pointer;
-}
-
-.material-icons {
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.material-icons.md-36 {
-    font-size: 36px;
+    margin: 5px;
+    height: 20px;
+    width: 20px;
 }
 
 .chat-lines {
@@ -85,6 +106,19 @@ body {
     font-size: 12px;
 }
 
+.notebook textarea {
+    min-width: 250px;
+    min-height: 268px;
+    margin-bottom: -3px;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.delete-item {
+    height: 20px;
+    width: 20px;
+}
+
 #window_container {
     position: relative;
 }
@@ -97,16 +131,27 @@ body {
 
 .right-aligned li {
     float: left;
+    width: 32px;
+    height: 32px;
+    padding: 0 10px;
 }
 
 .menu-bar {
+    font-family: "Montserrat", "Helvetica", sans-serif;
+    font-size: 27px;
     display: flex;
     height: 50px;
-    background-color: cadetblue;
+    background-color: gainsboro;
     border-bottom: 1px solid grey;
     margin-bottom: 10px;
     align-items: center;
     padding: 0 10px;
+}
+
+.menu-bar img {
+    width: inherit;
+    height: inherit;
+    cursor: pointer;
 }
 
 .board {

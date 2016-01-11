@@ -11,15 +11,16 @@
     var desktop = new Desktop();
 
     // Import the necessary apps.
+    var Notebook = require("./Notebook");
     var Memory = require("./Memory");
     var Chat = require("./Chat");
 
-    var newWindow = document.querySelector("#new_window");
+    var newNotebookWindow = document.querySelector("#new_notebook");
     var newChatWindow = document.querySelector("#new_chat");
     var newMemoryWindow = document.querySelector("#new_memory");
 
-    newWindow.addEventListener("click", function() {
-        desktop.attachWindow();
+    newNotebookWindow.addEventListener("click", function() {
+        desktop.attachWindow(new Notebook());
     });
 
     newChatWindow.addEventListener("click", function() {

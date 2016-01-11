@@ -1,6 +1,8 @@
 function Memory(boardX, boardY) {
     // TODO: where should I handle legal/illegal board sizes?
 
+    this.imageSrc = "puzzle";
+
     this.boardX = boardX || 4;
     this.boardY = boardY || 4;
     this.totalBricks = 0;

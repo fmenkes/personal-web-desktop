@@ -65,15 +65,30 @@ Desktop.prototype.attachWindow = function(app) {
 };
 
 Desktop.prototype.attachEventListeners = function(appWindow) {
+    var _this = this;
 
-    // Attaches the event listener that gives the app window focus
-    appWindow.div.addEventListener("mousedown", this.giveFocus.bind(this));
+    // Attaches the event listener that gives the app window focus and hides the menu
+    appWindow.div.addEventListener("mousedown", function(event) {
+        _this.giveFocus(event);
+
+        if (!appWindow.dropdown.classList.contains("removed") && !event.target.classList.contains("toolbar-icon")
+            && !event.target.classList.contains("dropdown-name") && !event.target.classList.contains("dropdown-item")) {
+            appWindow.dropdown.classList.add("removed");
+        }
+    });
+
+    appWindow.appContainer.addEventListener("refresh", function() {
+        appWindow.refreshApp();
+    });
 
     // Attaches the event listener that starts moving the window
     appWindow.toolbar.addEventListener("mousedown", this.startMove.bind(this));
 
+    appWindow.menuIcon.addEventListener("click", this.showMenu.bind(appWindow));
+
     // Attaches the event listener that closes the window and removes it from the list of windows.
     appWindow.closeWindow.addEventListener("click", function() {
+        //TODO: make sure this deletes the chat instance too!
         this.container.removeChild(appWindow.div);
         this.windows.splice(this.windows.indexOf(appWindow), 1);
     }.bind(this));
@@ -86,6 +101,12 @@ Desktop.prototype.giveFocus = function(event) {
     }
 
     event.stopPropagation();
+};
+
+Desktop.prototype.showMenu = function(event) {
+    event.preventDefault();
+
+    this.dropdown.classList.toggle("removed");
 };
 
 Desktop.prototype.moveWindow = function(event) {
@@ -107,6 +128,11 @@ Desktop.prototype.moveWindow = function(event) {
 };
 
 Desktop.prototype.startMove = function(event) {
+    // Make sure the user isn't selecting the menu icon or "close window" button.
+    if (!event.target.classList.contains("toolbar")) {
+        return;
+    }
+
     this.movingWindow = event.target.parentNode;
 
     this.distance.x = this.mousePos.x - event.target.parentNode.offsetLeft;
