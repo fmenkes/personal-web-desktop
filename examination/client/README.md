@@ -10,7 +10,7 @@ Please check that your application meets the requirements below before submittin
 * ~~The user shall be able to open multiple windows within the application.~~
 * ~~The user shall be able to drag and move the windows in the document.~~
 * ~~The user shall be able to open and close new windows of the desired application by clicking or double clicking an icon at the desktop.~~
-* The icon used to open the window should be represented in the upper bar of the window.
+* ~~The icon used to open the window should be represented in the upper bar of the window.~~
 * ~~Windows should get focus when clicked/dragged.~~
 * ~~The window with focus shall be on top of all other windows.~~
 
@@ -20,8 +20,8 @@ The following three applications should at least be included in the desktop appl
 * One, by you, designed and decided application
 
 ### Non functional requirements PWD:
-* The application shall be visually appealing
-* The code shall be organized in appropriate modules
+* ~~The application shall be visually appealing~~
+* ~~The code shall be organized in appropriate modules~~
 
 ## The memory game application
 See [exercise/memory/README.md](https://github.com/1dv022/exercise/blob/memory/exercise/memory/README.md) for a description of this application.

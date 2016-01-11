@@ -68,11 +68,10 @@ Desktop.prototype.attachEventListeners = function(appWindow) {
     var _this = this;
 
     // Attaches the event listener that gives the app window focus and hides the menu
-    appWindow.div.addEventListener("mousedown", function(event) {
-        _this.giveFocus(event);
+    appWindow.div.addEventListener("mousedown", this.giveFocus.bind(this));
 
-        if (!appWindow.dropdown.classList.contains("removed") && !event.target.classList.contains("toolbar-icon")
-            && !event.target.classList.contains("dropdown-name") && !event.target.classList.contains("dropdown-item")) {
+    appWindow.div.addEventListener("click", function() {
+        if (!appWindow.dropdown.classList.contains("removed") && !event.target.classList.contains("toolbar-icon")) {
             appWindow.dropdown.classList.add("removed");
         }
     });
@@ -100,7 +99,7 @@ Desktop.prototype.giveFocus = function(event) {
         this.topZIndex += 1;
     }
 
-    event.stopPropagation();
+    //event.stopPropagation();
 };
 
 Desktop.prototype.showMenu = function(event) {

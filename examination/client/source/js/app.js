@@ -20,6 +20,10 @@
     var newMemoryWindow = document.querySelector("#new_memory");
 
     newNotebookWindow.addEventListener("click", function() {
+        if (!localStorage.getItem("notes")) {
+            localStorage.setItem("notes", JSON.stringify([{name: "Welcome", content: "Welcome to the Notebook app!"}]));
+        }
+
         desktop.attachWindow(new Notebook());
     });
 

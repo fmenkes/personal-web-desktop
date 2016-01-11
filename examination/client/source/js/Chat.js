@@ -9,6 +9,7 @@ function Chat(username) {
     this.lastLines = [];
 
     this.imageSrc = "chat";
+    this.title = "Webchat";
 
     this.defaultTitle = document.title;
     this.username = username;
