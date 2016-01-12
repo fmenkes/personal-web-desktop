@@ -103,7 +103,7 @@ Memory.prototype.setActiveGame = function() {
 /**
  * Keyboard handler for the Memory game. Controls are left, up, right, down, and enter.
  */
-Memory.prototype.keyboardHandler = function() {
+Memory.prototype.keyboardHandler = function(event) {
     var indexOf = Array.prototype.indexOf;
 
     if (!this.board.classList.contains("active")) {

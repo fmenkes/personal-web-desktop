@@ -80,7 +80,7 @@ Desktop.prototype.attachEventListeners = function(appWindow) {
     appWindow.div.addEventListener("mousedown", this.giveFocus.bind(this));
 
     // Attaches the event listener that hides the menu.
-    appWindow.div.addEventListener("click", function() {
+    appWindow.div.addEventListener("click", function(event) {
         if (!appWindow.dropdown.classList.contains("removed") && !event.target.classList.contains("toolbar-icon")) {
             appWindow.dropdown.classList.add("removed");
         }

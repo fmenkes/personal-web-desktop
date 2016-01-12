@@ -5,6 +5,7 @@ html, body {
 
 body {
     background-image: url("../image/background.jpg");
+    background-size: contain;
     height: 100%;
     font-family: "Helvetica", sans-serif;
 }
@@ -133,7 +134,7 @@ body {
     width: 10px;
     float: right;
     cursor: pointer;
-    margin: 4px;
+    margin: 3px;
 }
 
 #window_container {
