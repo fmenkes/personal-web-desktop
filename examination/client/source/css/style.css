@@ -120,7 +120,7 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 5px;
-    height: 270px;
+    height: 259px;
     overflow: scroll;
 }
 
@@ -138,6 +138,11 @@ body {
 
 #window_container {
     position: relative;
+}
+
+.highlighted {
+    outline: 1px solid orange;
+    outline-offset: -4px;
 }
 
 .right-aligned {
@@ -186,8 +191,17 @@ body {
     visibility: hidden;
 }
 
+.new-game {
+    display: table;
+    margin: 0 auto;
+}
+
 .new-game input {
     width: 20px;
+}
+
+.new-game button {
+    margin-right: 6px;
 }
 
 .memory {
@@ -200,10 +214,11 @@ body {
 
 .memory-menu {
     margin: 20px auto 0;
-    width: 150px;
+    width: 200px;
     font-size: 12px;
 }
 
-.memory-menu span {
-    margin-bottom: 10px;
+.info {
+    display: table;
+    margin: 0 auto 2px;
 }

@@ -15,9 +15,9 @@ Please check that your application meets the requirements below before submittin
 * ~~The window with focus shall be on top of all other windows.~~
 
 The following three applications should at least be included in the desktop application:
-* A memory-game
-* A chat connected to a central chat channel using websockets
-* One, by you, designed and decided application
+* ~~A memory-game~~
+* ~~A chat connected to a central chat channel using websockets~~
+* ~~One, by you, designed and decided application~~
 
 ### Non functional requirements PWD:
 * ~~The application shall be visually appealing~~
@@ -28,8 +28,8 @@ See [exercise/memory/README.md](https://github.com/1dv022/exercise/blob/memory/e
 
 ### Functional requirements, Memory application:
 * ~~The user should be able to open and play multiple memory games simultaneously.~~
-* The user should be able to play the game using only the keyboard.
-* One, by you decided, extended feature
+* ~~The user should be able to play the game using only the keyboard.~~
+* ~~One, by you decided, extended feature~~
 
 ## The chat application
 The chat application shall be connected to other students chats via a web socket-server.
