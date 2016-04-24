@@ -19,7 +19,9 @@ function Chat(username) {
 
     this.appContent = this.createAppContent();
     this.chatLines = this.appContent.querySelector(".chat-lines");
-    this.apiKey = "eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd";
+
+    // Chat disabled
+    this.apiKey = "removed";
     this.socket = new WebSocket("ws://vhost3.lnu.se:20080/socket/");
 
     // Attach an event listener to know when the user focuses on the PWD tab.
@@ -32,7 +34,7 @@ function Chat(username) {
         var message = JSON.parse(event.data);
 
         // Append the line to the Chat lines, unless it is a server heartbeat.
-        if (message.type != "heartbeat") {
+        if (message.type !== "heartbeat") {
             _this.appendLine(message.username, message.data);
         }
     });
@@ -195,10 +197,10 @@ Chat.prototype.sendMessage = function(message) {
     data.key = this.apiKey;
     data.type = "message";
 
-    this.socket.send(JSON.stringify(data));
+    // Chat is now an echo chamber!
+    //this.socket.send(JSON.stringify(data));
 
-    // Offline capabilities for testing purposes.
-    //this.appendLine(this.username, message);
+    this.appendLine(this.username, message);
 };
 
 /**

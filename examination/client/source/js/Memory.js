@@ -278,7 +278,7 @@ Memory.prototype.initializeBoard = function() {
     this.bricks.forEach(function() {
         var brick = document.createElement("img");
         brick.classList.add("memory-brick");
-        brick.setAttribute("src", "/image/hidden.png");
+        brick.setAttribute("src", "image/hidden.png");
 
         _this.board.appendChild(brick);
     });
@@ -321,7 +321,7 @@ Memory.prototype.revealBrick = function(brick) {
     var index = Array.prototype.indexOf.call(this.board.children, brick);
 
     // Flip the brick
-    brick.setAttribute("src", "/image/" + this.bricks[index] + ".png");
+    brick.setAttribute("src", "image/" + this.bricks[index] + ".png");
 
     // If there is no selected brick, this is the selected brick
     if (!this.selectedBrick) {
@@ -377,8 +377,8 @@ Memory.prototype.checkMatch = function(brick) {
     } else {
         // If they don't match, flip them back over.
         setTimeout(function() {
-            brick.brickElem.setAttribute("src", "/image/hidden.png");
-            _this.selectedBrick.brickElem.setAttribute("src", "/image/hidden.png");
+            brick.brickElem.setAttribute("src", "image/hidden.png");
+            _this.selectedBrick.brickElem.setAttribute("src", "image/hidden.png");
 
             _this.selectedBrick = null;
             _this.board.addEventListener("click", _this.boundReveal);
